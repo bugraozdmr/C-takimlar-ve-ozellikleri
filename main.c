@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct oyuncular {
+	char isim[30];
+	int yas;
+
+	struct oyuncu_ozellik {
+		char ozellik[40];
+	};
+};
+
+struct takim {
+	char ad[20];
+	struct oyuncular oyuncu1, oyuncu2;
+
+	struct takim_ozellik {
+		char ozellik[40];
+	};
+}takimlar[20];
+
+
+
+
+void oyuncu(struct oyuncular *a){		//ptr kullanýrsak adresle cagirir
+	printf("%s oyuncusu ozelligi nedir :", a->isim); fgets(a->ozellik, sizeof(a->ozellik), stdin);
+}
+
+void takimm(struct takim *k) {
+	printf("%s takimi ozelligi:", k->ad); fgets(k->ozellik, sizeof(k->ozellik), stdin);
+}
+
+void yazdir(struct takim k) {
+	printf("%s\ntakim oyunculari :%s\t%s\n", k.ad, k.oyuncu1.isim, k.oyuncu2.isim);
+	printf("takim ozelligi:%s\n", k.ozellik);
+	printf("%s oyuncusu ozelligi:%s%s oyuncusu ozelligi:%s\n", k.oyuncu1, k.oyuncu1.ozellik, k.oyuncu2, k.oyuncu2.ozellik);
+}
+
+int main(){
+	int a;
+	printf("kac adet takim katilacak:"); scanf("%d", &a);
+	getchar();
+	for (int i = 0; i < a; i++) {
+		printf("%d.takim ismi:", i + 1); fgets(takimlar[i].ad, sizeof(takimlar[i].ad), stdin);
+		if (takimlar[i].ad[strlen(takimlar[i].ad) - 1] == '\n') {		//null terminating
+			takimlar[i].ad[strlen(takimlar[i].ad) - 1] = '\0';
+		}
+		takimm(&takimlar[i]);
+		printf("1. oyuncu ismi:"); fgets(takimlar[i].oyuncu1.isim, sizeof(takimlar[i].oyuncu1.isim), stdin);
+		if (takimlar[i].oyuncu1.isim[strlen(takimlar[i].oyuncu1.isim) - 1] == '\n') {		//null terminating
+			takimlar[i].oyuncu1.isim[strlen(takimlar[i].oyuncu1.isim) - 1] = '\0';
+		}
+		oyuncu(&takimlar[i].oyuncu1);
+		printf("2. oyuncu ismi:"); fgets(takimlar[i].oyuncu2.isim, sizeof(takimlar[i].oyuncu2.isim), stdin);
+		if (takimlar[i].oyuncu2.isim[strlen(takimlar[i].oyuncu2.isim) - 1] == '\n') {		//null terminating
+			takimlar[i].oyuncu2.isim[strlen(takimlar[i].oyuncu2.isim) - 1] = '\0';
+		}
+		oyuncu(&takimlar[i].oyuncu2);
+		printf("\n********************\n");
+	}
+
+	
+	for (int i = 0; i < a; i++) {
+		yazdir(takimlar[i]);
+		printf("--------------------")
+	}
+}
+
+
