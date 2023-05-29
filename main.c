@@ -22,7 +22,7 @@ struct takim {
 
 
 
-void oyuncu(struct oyuncular *a){		//ptr kullanýrsak adresle cagirir
+void oyuncu(struct oyuncular *a){		//ptr kullanÄ±rsak adresle cagirir
 	printf("%s oyuncusu ozelligi nedir :", a->isim); fgets(a->ozellik, sizeof(a->ozellik), stdin);
 }
 
@@ -62,7 +62,7 @@ int main(){
 	
 	for (int i = 0; i < a; i++) {
 		yazdir(takimlar[i]);
-		printf("--------------------")
+		printf("--------------------");
 	}
 }
 
